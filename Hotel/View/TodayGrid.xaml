@@ -6,12 +6,15 @@
              xmlns:local="clr-namespace:Hotel.View"
              xmlns:viewmodel="clr-namespace:ViewModel"
              xmlns:viewModel="clr-namespace:Hotel.ViewModel"
-
+            xmlns:handler="clr-namespace:Hotel.Global"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
         <viewModel:TodayVm></viewModel:TodayVm>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <handler:AutoGenerateHandler  x:Key="handle"></handler:AutoGenerateHandler>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

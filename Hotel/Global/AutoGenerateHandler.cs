@@ -1,10 +1,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices.JavaScript;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 
-namespace Hotel.ViewModel;
+namespace Hotel.Global;
 
 public static class AutoGenerateHandler
 {
@@ -22,6 +24,11 @@ public static class AutoGenerateHandler
         PropertyDescriptorCollection properties = TypeDescriptor.GetProperties (pd.ComponentType );
         //  get specific descriptor
         PropertyDescriptor property = properties.Find ( e.PropertyName, false );
-        e.Column.Header = property.DisplayName;
+        if (property.DisplayName != property.Name) e.Column.Header = property.DisplayName;
+        else e.Column.Visibility = Visibility.Hidden;
+        if (e.PropertyType == typeof(DateOnly?))
+        {
+            (e.Column as DataGridTextColumn).Binding.StringFormat="dd.MM.yyyy";
+        }
     }
 }

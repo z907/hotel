@@ -9,7 +9,10 @@ public class DateConverter:IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         DateOnly? d1 = value as DateOnly?;
-        var d2 = (DateOnly)d1;
+        DateOnly d2;
+        if (d1 != null)
+           d2= (DateOnly)d1;
+        else return null;
        return d2.ToDateTime(new TimeOnly(0));
     }
          

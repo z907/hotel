@@ -8,22 +8,22 @@ namespace Model.Context;
 
 public partial class HotelDbContext : DbContext
 {
-    public HotelDbContext():base()
+    public HotelDbContext()
     {
-      
     }
 
-  
     public HotelDbContext(DbContextOptions<HotelDbContext> options)
         : base(options)
     {
-       
     }
-    
+
+    public virtual DbSet<AdditionalService> AdditionalServices { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
+
+    public virtual DbSet<ResAddService> ResAddServices { get; set; }
 
     public virtual DbSet<Reservation> Reservations { get; set; }
 
@@ -49,6 +49,14 @@ public partial class HotelDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AdditionalService>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("AdditionalServices_pkey");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnType("character varying");
+        });
+
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("Customer_pkey");
@@ -73,6 +81,23 @@ public partial class HotelDbContext : DbContext
                 .HasConstraintName("Payment_ReservationId_fkey");
         });
 
+        modelBuilder.Entity<ResAddService>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("ResAddServices_pkey");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+
+            entity.HasOne(d => d.Reservation).WithMany(p => p.ResAddServices)
+                .HasForeignKey(d => d.ReservationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ResAddServices_ReservationId_fkey");
+
+            entity.HasOne(d => d.Service).WithMany(p => p.ResAddServices)
+                .HasForeignKey(d => d.ServiceId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ResAddServices_ServiceId_fkey");
+        });
+
         modelBuilder.Entity<Reservation>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("Reservation_pkey");
@@ -91,8 +116,8 @@ public partial class HotelDbContext : DbContext
                 .HasForeignKey(d => d.RoomId)
                 .HasConstraintName("Reservation_RoomID_fkey");
 
-            entity.HasOne(d => d.StatusNavigation).WithMany(p => p.Reservations)
-                .HasForeignKey(d => d.Status)
+            entity.HasOne(d => d.Status).WithMany(p => p.Reservations)
+                .HasForeignKey(d => d.StatusId)
                 .HasConstraintName("Reservation_Status_fkey");
         });
 
@@ -192,3 +217,4 @@ public partial class HotelDbContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+

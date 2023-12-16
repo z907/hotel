@@ -1,12 +1,38 @@
-<UserControl x:Class="Hotel.View.ChooseCustomerControl"
+<UserControl x:Name="Cc" x:Class="Hotel.View.ChooseCustomerControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Hotel.View"
+             xmlns:viewModel="clr-namespace:Hotel.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="330">
+    <Control.Resources>
+        <viewModel:ChooseCustomerVm x:Key="ccv"></viewModel:ChooseCustomerVm>
+    </Control.Resources>
     <Grid>
-        <TextBox Text="cust"></TextBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0"   Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <TextBlock  Width="160" Height="30" >Имя</TextBlock>
+                <TextBlock Width="160" Height="30" >Фамилия</TextBlock>
+                <TextBlock Width="160" Height="30" >Отчество</TextBlock>
+                <TextBlock Width="160" Height="30">Эл.Почта</TextBlock>
+                <TextBlock Width="160" Height="30" >Номер телефона</TextBlock>
+                <Button CommandParameter="{Binding ElementName=Cc,Path=DataContext}" Command="{Binding Source={StaticResource ccv},Path=ChooseExistingCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25">
+                    <TextBlock TextAlignment="Center" TextWrapping="Wrap">Выбрать</TextBlock> 
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.Name,Mode=TwoWay}"></TextBox>
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.Surname,Mode=TwoWay}"></TextBox>
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.LastName,Mode=TwoWay}"></TextBox> 
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.Email,Mode=TwoWay}"></TextBox>
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.PhoneNumber,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

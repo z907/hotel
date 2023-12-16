@@ -8,7 +8,7 @@ using ViewModel.VmEntities;
 
 namespace ViewModel.Services;
 
-public class ReservationService:BaseService,IService
+public class ReservationService:BaseService
 {
     
         public ReservationService() : base()
@@ -32,15 +32,38 @@ public class ReservationService:BaseService,IService
         
             var resList = db.Reservations.Include(res=>res.Customer)
                 .ToList();
+            result.OrderBy(r=>r.StartDate);
             Debug.WriteLine(resList[0].Customer.Name);
-       
-        
         return result;
-
     }
     
-    public void Add(IEntity item)
+    public void AddReservation(DisplayReservation item)
+    {
+        //status=1!!!!
+        Reservation res = new Reservation();
+        res.CustomerId = (int)item.CustomerId;
+        res.TotalCost = item.TotalCost;
+        res.StartDate = item.StartDate;
+        res.EndDate = item.EndDate;
+        
+        db.RoomAttributes.Load();
+        db.RoomCapacities.Load();
+        db.RoomQualities.Load();
+        db.RoomViewTypes.Load();
+        
+        res.RoomAttributesId = db.RoomAttributes.ToList().First(a=>a.Capacity.Value==item.RoomCapacity
+        && a.Quality.Name==item.RoomQuality && a.View.Name==item.RoomViewType).Id;
+        res.StatusId = db.ReservationStatuses.First(s => s.Status == "Активно").Id;
+
+        db.Reservations.Add(res);
+        db.SaveChanges();
+    }
+
+    public int GetId(DisplayReservation item)
     {
         
+        return db.Reservations.ToList().First(r => r.StartDate == item.StartDate && r.EndDate==item.EndDate 
+         && r.CustomerId==item.CustomerId && r.RoomAttributes.Capacity.Value==item.RoomCapacity 
+         && r.RoomAttributes.Quality.Name==item.RoomQuality && r.RoomAttributes.View.Name==item.RoomViewType && r.TotalCost==item.TotalCost && r.Status.Status=="Активно").Id;
     }
 }

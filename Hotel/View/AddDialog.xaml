@@ -10,9 +10,9 @@
         ResizeMode="NoResize"
         Title="AddDialog" Height="300" Width="400">
    
-    <Window.Resources>
-       <viewModel:AddDialogVm x:Key="Advm" ></viewModel:AddDialogVm>
-   </Window.Resources>
+    <Window.DataContext>
+       <viewModel:AddDialogVm ></viewModel:AddDialogVm>
+   </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="9*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
@@ -32,10 +32,10 @@
             </view:PickDateControl>
         </Grid>
         
-        <Button Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="0"  CommandParameter="{Binding ElementName=CurrentMenu}"  Command="{Binding  Source={StaticResource Advm},Path=Backward}">
+        <Button Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="0"  CommandParameter="{Binding ElementName=CurrentMenu}"  Command="{Binding  Path=Backward}">
             Назад
         </Button>
-       <Button Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="2"  CommandParameter="{Binding ElementName=CurrentMenu}"  Command="{Binding  Source={StaticResource Advm},Path=Forward}">
+       <Button Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="2"  CommandParameter="{Binding ElementName=CurrentMenu}"  Command="{Binding  Path=Forward}">
            Далее
        </Button>
     </Grid>

@@ -19,15 +19,16 @@ public partial class Reservation
 
     public int? TotalCost { get; set; }
 
-    public int? Status { get; set; }
+    public int? StatusId { get; set; }
 
     public virtual Customer? Customer { get; set; }
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+    public virtual ICollection<ResAddService> ResAddServices { get; set; } = new List<ResAddService>();
 
     public virtual Room? Room { get; set; }
 
     public virtual RoomAttribute? RoomAttributes { get; set; }
-
-    public virtual ReservationStatus? StatusNavigation { get; set; }
+    
+    public virtual ReservationStatus? Status { get; set; }
 }

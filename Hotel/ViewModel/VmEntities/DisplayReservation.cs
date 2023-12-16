@@ -23,9 +23,9 @@ public class DisplayReservation
         this.CustomerSurname = item.CustomerSurname;
         this.TotalCost = item.TotalCost;
     }
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
-    public int CustomerId { get; set; }
+    public int? CustomerId { get; set; }
     [DisplayName("Дата начала")]
     public DateOnly? StartDate { get; set; }
     [DisplayName("Дата конца")]

@@ -1,4 +1,5 @@
 using Hotel.VmEntities;
+using Microsoft.EntityFrameworkCore;
 using Model.Entities;
 using ViewModel.VmEntities;
 
@@ -18,7 +19,8 @@ public class CheckService:BaseService,IService
             FirstOrDefault();
         if (FoundAttr == null) return false;
         int roomcount = db.Rooms.Where(r=>r.RoomAttributesId==FoundAttr.Id).Count();
-        List<Reservation> resList = db.Reservations.Where(r => r.RoomAttributesId == FoundAttr.Id).Where(r=>r.Status==1).ToList();
+        db.ReservationStatuses.Load();
+        List<Reservation> resList = db.Reservations.Where(r => r.RoomAttributesId == FoundAttr.Id).Where(r=>r.Status.Status=="Активно").ToList();
         bool flag = false;
         int counter = 0;
         

@@ -19,4 +19,17 @@ public class AttributeService:BaseService
         var ls = db.RoomCapacities.ToList();
         return ls;
     }
+
+    public RoomCapacity GetCapacityByValue(int val)
+    {
+        return db.RoomCapacities.ToList().FirstOrDefault(c=>c.Value==val);
+    }
+    public RoomQuality GetQualityByName(string name)
+    {
+        return db.RoomQualities.ToList().FirstOrDefault(q=>q.Name==name);
+    }
+    public RoomViewType GetViewByName(string name)
+    {
+        return db.RoomViewTypes.ToList().FirstOrDefault(v=>v.Name==name);
+    }
 }

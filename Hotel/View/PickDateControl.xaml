@@ -10,7 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="330">
     <UserControl.Resources>
         <g:DateConverter x:Key="conv" ></g:DateConverter>
-       
+        <viewModel:PickDateVm x:Key="pdvm"></viewModel:PickDateVm>
     </UserControl.Resources> 
     <Grid>
         <StackPanel Grid.Row="0" Grid.Column="0"   Orientation="Horizontal">
@@ -22,15 +22,15 @@
                 <TextBlock Width="160" Height="30" >Вместимость номера</TextBlock>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <DatePicker SelectedDate="{Binding Mode=OneWayToSource,Converter={StaticResource conv}, Source={StaticResource advm}, Path=Res.StartDate}" x:Name="d1"  Width="160" Height="30">
+                <DatePicker SelectedDate="{Binding Mode=TwoWay,Converter={StaticResource conv},  Path=NewRes.StartDate}" x:Name="d1"  Width="160" Height="30">
                </DatePicker>
-                <DatePicker SelectedDate="{Binding Mode=OneWayToSource,Converter={StaticResource conv}, Path=NewRes.EndDate}" x:Name="d2" Width="160"  Height="30">
+                <DatePicker SelectedDate="{Binding Mode=TwoWay,Converter={StaticResource conv}, Path=NewRes.EndDate}" x:Name="d2" Width="160"  Height="30">
                 </DatePicker>
-                <ComboBox DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay, Path=Rview}" SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomViewType}" x:Name="c1"  Width="160" Height="30">
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay, Source={StaticResource pdvm}, Path=Rview}" SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomViewType}" x:Name="c1"  Width="160" Height="30">
                   </ComboBox>
-                <ComboBox DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay, Path=Qal}"  x:Name="c2" SelectedValue="{Binding Mode=TwoWay, Path=NewRes.RoomQuality}"  Width="160" Height="30" >
+                <ComboBox DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay,Source={StaticResource pdvm}, Path=Qal}"  x:Name="c2" SelectedValue="{Binding Mode=TwoWay, Path=NewRes.RoomQuality}"  Width="160" Height="30" >
                 </ComboBox>
-                <ComboBox DisplayMemberPath="Value" SelectedValuePath="Value" ItemsSource="{Binding Mode=OneWay, Path=Cap}"  SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomCapacity}" x:Name="c3" Width="160" Height="30">
+                <ComboBox DisplayMemberPath="Value" SelectedValuePath="Value" ItemsSource="{Binding Mode=OneWay,Source={StaticResource pdvm}, Path=Cap}"  SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomCapacity}" x:Name="c3" Width="160" Height="30">
                 </ComboBox>
             </StackPanel>
         </StackPanel>

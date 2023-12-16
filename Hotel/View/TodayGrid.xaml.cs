@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Controls;
+using Hotel.Global;
 using Hotel.ViewModel;
 
 
