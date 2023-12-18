@@ -20,7 +20,6 @@ public class MainVm:BaseVm
     {
         UserName = Thread.CurrentPrincipal.Identity.Name;
         ShowTodayListCommand = new VmCommand(ExecuteShowTodayListCommand, CanExecuteShowTodayListCommand);
-        
     }
 
     private void ExecuteShowTodayListCommand(object obj)

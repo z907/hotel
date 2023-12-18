@@ -26,11 +26,11 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.Name,Mode=TwoWay}"></TextBox>
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.Surname,Mode=TwoWay}"></TextBox>
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.LastName,Mode=TwoWay}"></TextBox> 
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.Email,Mode=TwoWay}"></TextBox>
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding NewCustomer.PhoneNumber,Mode=TwoWay}"></TextBox>
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.Name,Mode=TwoWay}"></TextBox>
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.Surname,Mode=TwoWay}"></TextBox>
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.LastName,Mode=TwoWay}"></TextBox> 
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.Email,Mode=TwoWay}"></TextBox>
+                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.PhoneNumber,Mode=TwoWay}"></TextBox>
             </StackPanel>
         </StackPanel>
         

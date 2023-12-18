@@ -6,14 +6,18 @@ using Hotel.ViewModel;
 
 namespace Hotel.View;
 
-public partial class ChooseExistingCustomer : Window
+public partial class СheckInDialog : Window
 {
-    public ChooseExistingCustomer()
+    public СheckInDialog()
     {
         InitializeComponent();
-        gr.AutoGeneratingColumn += AutoGenerateHandler.RenameColumnsOnAutogeneration;
     }
-
+    public СheckInDialog(int resId)
+    {
+        InitializeComponent();
+        (this.DataContext as CheckInVm).LoadRooms(resId);
+        //this.gr.AutoGeneratingColumn += AutoGenerateHandler.RenameColumnsOnAutogeneration;
+    }
     private void Gr_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (sender != null)

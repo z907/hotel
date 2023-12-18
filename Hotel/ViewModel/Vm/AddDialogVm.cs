@@ -15,6 +15,7 @@ public class AddDialogVm:BaseVm
    
     private ChooseCustomerControl cust ;
     private ChooseServicesControl serv;
+    private CostService costServ;
     private bool _serviceBilliards; 
     private bool _serviceSauna; 
     private bool _serviceBar; 
@@ -43,7 +44,7 @@ public class AddDialogVm:BaseVm
        {
            _serviceBilliards = value;
            OnPropertyChanged(nameof(ServiceBilliards));
-           CountTotalCost();
+           UpdateCost();
        } 
    }
    public bool ServiceBar
@@ -53,7 +54,7 @@ public class AddDialogVm:BaseVm
        {
            _serviceBar = value;
            OnPropertyChanged(nameof(ServiceBar));
-           CountTotalCost();
+           UpdateCost();
        } 
    }
    public bool ServiceSauna
@@ -63,7 +64,7 @@ public class AddDialogVm:BaseVm
        {
            _serviceSauna = value;
            OnPropertyChanged(nameof(ServiceSauna));
-           CountTotalCost();
+           UpdateCost();
        } 
    }
     
@@ -78,13 +79,13 @@ public class AddDialogVm:BaseVm
         } 
     }
     private Customer _newCustomer=new Customer();
-    public Customer NewCustomer
+    public Customer Customer
     {
         get => _newCustomer;
         set
         {
            if(value is not null) _newCustomer = value;
-            OnPropertyChanged(nameof(NewCustomer));
+            OnPropertyChanged(nameof(Customer));
         } 
     }
     public ICommand Forward
@@ -113,6 +114,7 @@ public class AddDialogVm:BaseVm
         custServ = new CustomerService();
         attrServ = new AttributeService();
         serviceServ = new AdditionalServicesService();
+        costServ = new CostService();
     }
 
    
@@ -134,7 +136,7 @@ public class AddDialogVm:BaseVm
                 if (ValidateCustomer())
                 {
                     windowStep++;
-                    CountTotalCost();
+                    UpdateCost();
                     gr.Children.Clear();
                     gr.Children.Add(serv);
                 }
@@ -174,16 +176,7 @@ public class AddDialogVm:BaseVm
                 break;
         }
     }
-
-    // private void ClearCustomer()
-    // {
-    //     NewCustomer.Id = null;
-    //     NewCustomer.Name = null;
-    //     NewCustomer.Surname = null;
-    //     NewCustomer.LastName = null;
-    //     NewCustomer.Email = null;
-    //     NewCustomer.PhoneNumber = null;
-    // }
+    
     private bool ValidateReservation()
     {
         if (_newRes.StartDate == null || _newRes.EndDate == null || _newRes.RoomQuality == null ||
@@ -228,6 +221,10 @@ public class AddDialogVm:BaseVm
         AddChosenServices(resServ.GetId(_newRes));
     }
 
+    private void UpdateCost()
+    {
+        TotalCost = costServ.CountTotalCost(NewRes, ServiceBar, ServiceSauna, ServiceBilliards);
+    }
     private void CountTotalCost()
     {
        int roomQualityCost = (int)attrServ.GetQualityByName(_newRes.RoomQuality).Price;

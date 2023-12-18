@@ -1,9 +1,12 @@
+using Hotel.VmEntities;
+using Microsoft.EntityFrameworkCore;
 using Model.Entities;
 
 namespace ViewModel.Services;
 
 public class AttributeService:BaseService
 {
+    
     public List<RoomQuality> GetQualities()
     {
         var ls = db.RoomQualities.ToList();

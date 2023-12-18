@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Model.Entities;
 
 namespace ViewModel.Services;
@@ -20,5 +21,19 @@ public class AdditionalServicesService:BaseService
         newItem.ServiceId = servId;
         db.ResAddServices.Add(newItem);
         db.SaveChanges();
+    }
+
+    public List<ResAddService> GetAdditionalServicesForReservation(int id)
+    {
+        db.AdditionalServices.Load();
+        return db.ResAddServices.Where(s => s.ReservationId == id).ToList();
+    }
+
+    public void RemakeServices(bool serviceBar, bool serviceSauna, bool serviceBilliards,int id)
+    {
+        db.ResAddServices.RemoveRange(db.ResAddServices.Where(r=>r.ReservationId==id));
+        if (serviceBar)AddServiceStatement(id,GetAdditionalServiceByName("Безлимитный бар").Id);
+        if (serviceSauna) AddServiceStatement(id,GetAdditionalServiceByName("Посещение сауны").Id);;
+        if (serviceBilliards) AddServiceStatement(id,GetAdditionalServiceByName("Бильярд").Id);;
     }
 }

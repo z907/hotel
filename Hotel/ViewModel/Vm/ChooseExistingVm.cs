@@ -9,17 +9,7 @@ public class ChooseExistingVm:BaseVm
 {
     private CustomerService _customerService;
     private List<Customer> _customers;
-    private bool _selectedExist;
-    
-    public bool SelectedExist
-    {
-        get => _selectedExist;
-        set
-        {
-            _selectedExist = value;
-            OnPropertyChanged(nameof(SelectedExist));
-        }
-    }
+   
     public List<Customer> Customers
     {
         get => _customers;

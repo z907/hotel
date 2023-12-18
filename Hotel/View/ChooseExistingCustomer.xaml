@@ -16,7 +16,7 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0">
-        <DataGrid  SelectedItem="{Binding NewCustomer,Mode=OneWayToSource,UpdateSourceTrigger=Explicit}" ColumnWidth="*" x:Name="gr" AutoGenerateColumns="True" ItemsSource="{Binding Source={StaticResource cev},Path=Customers}">
+        <DataGrid MouseDown="Gr_OnMouseDown" SelectedItem="{Binding Customer,Mode=OneWayToSource,UpdateSourceTrigger=Explicit}" ColumnWidth="*" x:Name="gr" AutoGenerateColumns="True" ItemsSource="{Binding Source={StaticResource cev},Path=Customers}">
             
         </DataGrid>
         </ScrollViewer>

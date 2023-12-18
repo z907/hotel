@@ -1,4 +1,4 @@
-<Window  x:Class="Hotel.EditDialog"  x:Name="EditWindow"
+<Window x:Name="Window" x:Class="Hotel.View.DetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Hotel.View"
         xmlns:viewModel="clr-namespace:Hotel.ViewModel"
         mc:Ignorable="d"
-        Title="Изменение" Height="550" Width="700">
-   <Window.DataContext>
-       <viewModel:DetailsVm></viewModel:DetailsVm>
-   </Window.DataContext>
+        Title="Подробности" Height="550" Width="700">
+    <Window.DataContext>
+        <viewModel:DetailsVm></viewModel:DetailsVm>
+    </Window.DataContext>
     <Grid>
         <local:DetailedControl></local:DetailedControl>
     </Grid>

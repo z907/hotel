@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Hotel.View"
-             xmlns:viewmodel="clr-namespace:ViewModel"
              xmlns:viewModel="clr-namespace:Hotel.ViewModel"
             xmlns:handler="clr-namespace:Hotel.Global"
              mc:Ignorable="d"
@@ -35,14 +34,14 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Button Command="{Binding Add}" Grid.Column="0">Добавить</Button>
-            <Button Grid.Column="1">Удалить</Button>
+            <Button Command="{Binding Delete}"  Grid.Column="1">Удалить</Button>
             <Button Command="{Binding Edit}" Grid.Column="2">Изменить</Button>
-            <Button Grid.Column="3">Просмотреть</Button>
-            <Button Grid.Column="4">Заселить</Button>
+            <Button Command="{Binding Details}" Grid.Column="3">Просмотреть</Button>
+            <Button Command="{Binding CheckIn}" Grid.Column="4">Заселить</Button>
         </Grid>
             <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1">
                 
-                    <DataGrid ColumnWidth="*"  SelectedItem="{Binding Path=SelectedRes, Mode=TwoWay}" AutoGenerateColumns="True" x:Name="TodayDataGrid" ItemsSource="{Binding TodayList}" >
+                    <DataGrid MouseDown="dataGrid1_MouseLeftButtonDown" ColumnWidth="*"  SelectedItem="{Binding Path=SelectedRes, Mode=TwoWay}" AutoGenerateColumns="True" x:Name="TodayDataGrid" ItemsSource="{Binding TodayList}" >
                     </DataGrid>
                 
         </ScrollViewer>

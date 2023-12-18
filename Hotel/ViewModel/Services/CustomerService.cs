@@ -8,6 +8,10 @@ public class CustomerService:BaseService
     {
     }
 
+    public Customer GetCustomerById(int id)
+    {
+        return db.Customers.Find(id);
+    }
     public List<Customer> GetCustomerList()
     {
         return db.Customers.ToList();
