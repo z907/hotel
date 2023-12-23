@@ -20,7 +20,6 @@ public class AddDialogVm:BaseVm
     private bool _serviceSauna; 
     private bool _serviceBar; 
     private PickDateControl date;
-    private DisplayReservation res=new DisplayReservation();
     private int _totalCost;
     
     private CheckService check;
@@ -185,7 +184,7 @@ public class AddDialogVm:BaseVm
             MessageBox.Show("Заполните все поля!");
             return false;
         }
-        if( _newRes.EndDate < _newRes.StartDate)
+        if( _newRes.EndDate < _newRes.StartDate || _newRes.StartDate<new DateOnly(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day))
         {
             MessageBox.Show("Некорректные даты!");
             return false;

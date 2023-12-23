@@ -6,7 +6,7 @@ using ViewModel.VmEntities;
 
 namespace ViewModel.Services;
 
-public class CheckService:BaseService,IService
+public class CheckService:BaseService
 {
     private IDbRepos DbRepos;
     public bool CheckForFreeRooms(DisplayReservation toCheck)
@@ -73,10 +73,5 @@ public class CheckService:BaseService,IService
             }
         }
         return !flag;
-    }
-    
-    public void Add(IEntity item)
-    {
-        
     }
 }

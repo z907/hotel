@@ -11,7 +11,7 @@ public class VmUser:IEntity
     public string? Password { get; set; }
 
     public int? Role { get; set; }
-    
+     public string? RoleName  { get; set; }
     public VmUser(){}
 
     public VmUser(User u)
@@ -20,6 +20,7 @@ public class VmUser:IEntity
         Login= u.Login;
         Password = u.Password;
         Role = u.Role;
+        RoleName = u.RoleNavigation.Role;
     }
     
 }

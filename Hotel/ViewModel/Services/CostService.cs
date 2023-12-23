@@ -1,4 +1,5 @@
 using Hotel.VmEntities;
+using Model.Context;
 using Model.Entities;
 
 namespace ViewModel.Services;
@@ -12,6 +13,12 @@ public class CostService:BaseService
     {
         attrServ = new AttributeService();
         serviceServ = new AdditionalServicesService();
+    }
+
+    public void SetDb(HotelDbContext cont)
+    {
+        attrServ.db = cont;
+        serviceServ.db = cont;
     }
     public int CountTotalCost(DisplayReservation resToCount,bool ServiceBar,bool ServiceSauna,bool ServiceBilliards)
     {

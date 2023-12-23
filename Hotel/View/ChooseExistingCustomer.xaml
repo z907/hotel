@@ -6,20 +6,27 @@
         xmlns:local="clr-namespace:Hotel.View"
         xmlns:viewModel="clr-namespace:Hotel.ViewModel"
         mc:Ignorable="d"
-        Title="ChooseExistingCustomer" Height="450" Width="600">
+        Title="ChooseExistingCustomer" Height="500" Width="750"
+        MouseDown="Window_MouseDown"
+        Style="{StaticResource DefaultDialog}"
+        WindowStartupLocation="CenterScreen">
     <Control.Resources>
         <viewModel:ChooseExistingVm x:Key="cev"></viewModel:ChooseExistingVm>
     </Control.Resources>
+    <Border Style="{StaticResource DialogWindowBorder}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0">
-        <DataGrid MouseDown="Gr_OnMouseDown" SelectedItem="{Binding Customer,Mode=OneWayToSource,UpdateSourceTrigger=Explicit}" ColumnWidth="*" x:Name="gr" AutoGenerateColumns="True" ItemsSource="{Binding Source={StaticResource cev},Path=Customers}">
+        <Button Click="CloseClick" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource CloseButton}"></Button>
+        <ScrollViewer Style="{StaticResource DefaultScroller}" VerticalScrollBarVisibility="Visible" Grid.Row="1">
+        <DataGrid  Style="{StaticResource DefaultDataGrid}" MouseDown="Gr_OnMouseDown" SelectedItem="{Binding Customer,Mode=OneWayToSource,UpdateSourceTrigger=Explicit}" ColumnWidth="*" x:Name="gr" AutoGenerateColumns="True" ItemsSource="{Binding Source={StaticResource cev},Path=Customers}">
             
         </DataGrid>
         </ScrollViewer>
-        <Button CommandParameter="{Binding ElementName=wnd}" Command="{Binding Source={StaticResource cev},Path=OK}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100">OK</Button>
+        <Button  Style="{StaticResource ActionButton}" CommandParameter="{Binding ElementName=wnd}" Command="{Binding Source={StaticResource cev},Path=OK}" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" >OK</Button>
     </Grid>
+    </Border>
 </Window>

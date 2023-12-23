@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Hotel.View"
              xmlns:g="clr-namespace:Hotel.Global"
+             Background="{StaticResource DefaultColorBrush}"
              mc:Ignorable="d"
-             d:DesignHeight="550" d:DesignWidth="700">
+             d:DesignHeight="500" d:DesignWidth="750">
     <UserControl.Resources>
         <g:DateConverter x:Key="conv" ></g:DateConverter>
         <g:BoolInverseConverter x:Key="boolConv" ></g:BoolInverseConverter>
@@ -14,65 +15,92 @@
    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="6*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="2*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="40" />
            
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <StackPanel  Orientation="Vertical">
-                <TextBlock VerticalAlignment="Center" Height="33">Дата начала</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Дата конца</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Вид из номера</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Тип номера</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Вместимость</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Стоимость</TextBlock>
-            </StackPanel>
-            <StackPanel Margin="10,0,0,0" Orientation="Vertical">
-                <DatePicker SelectedDate="{Binding StartDate,Mode=TwoWay,Converter={StaticResource conv}}" IsEnabled="{Binding Editable}" Margin="0,0,0,5" MinHeight="20" MinWidth="120"></DatePicker>
-                <DatePicker SelectedDate="{Binding EndDate,Mode=TwoWay,Converter={StaticResource conv}}"  IsEnabled="{Binding Editable}"  Margin="0,5,0,5" MinHeight="20" MinWidth="120"></DatePicker>
-                <ComboBox SelectedValuePath="Name" SelectedValue="{Binding Reservation.RoomViewType,Mode=TwoWay}" DisplayMemberPath="Name" ItemsSource="{Binding Rview}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" MinHeight="20" MinWidth="120"></ComboBox>
-                <ComboBox SelectedValuePath="Name" SelectedValue="{Binding Reservation.RoomQuality,Mode=TwoWay}" DisplayMemberPath="Name" ItemsSource="{Binding Qal}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" MinHeight="20" MinWidth="120"></ComboBox>
-                <ComboBox SelectedValuePath="Value" SelectedValue="{Binding Reservation.RoomCapacity,Mode=TwoWay}" DisplayMemberPath="Value" ItemsSource="{Binding Cap}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" MinHeight="20" MinWidth="120"></ComboBox>
-                <TextBox Text="{Binding Reservation.TotalCost,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="0,5,0,5" MinHeight="24" MinWidth="120"></TextBox>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <TextBlock VerticalAlignment="Center" Height="33">Имя клиента</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Фамилия клиента</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Отчество клиента</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="33">Телефон</TextBlock>
-                <TextBlock VerticalAlignment="Center" Height="32">Эл. Почта</TextBlock>
-                <Button Visibility="{Binding AddButtonVisibility,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="120" Height="40" Command="{Binding ChooseExisting}">
-                    <TextBlock TextAlignment="Center" Width="70" Text="Выбрать постояльца" TextWrapping="Wrap"></TextBlock>
-                </Button>
-            </StackPanel>
-            <StackPanel Margin="10,0,0,0" Orientation="Vertical">
-                <TextBox Text="{Binding Customer.Name,Mode=TwoWay}" IsEnabled="{Binding Editable}" Margin="0,0,0,5" MinHeight="22" MinWidth="140"></TextBox>
-                <TextBox Text="{Binding Customer.Surname,Mode=TwoWay}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" MinHeight="22" MinWidth="140"></TextBox>
-                <TextBox Text="{Binding Customer.LastName,Mode=TwoWay}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" MinHeight="22" MinWidth="140"></TextBox>
-                <TextBox Text="{Binding Customer.PhoneNumber,Mode=TwoWay}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" MinHeight="22" MinWidth="140"></TextBox>
-                <TextBox Text="{Binding Customer.Email,Mode=TwoWay}" IsEnabled="{Binding Editable}" Margin="0,5,0,13" MinHeight="22" MinWidth="140"></TextBox>
-                <Button Visibility="{Binding AddButtonVisibility,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="120" Height="40" Command="{Binding CreateNewCustomer}">
-                    <TextBlock TextAlignment="Center" Width="70" Text="Новый постоялец" TextWrapping="Wrap"></TextBlock>
-                </Button>
-            </StackPanel>
-        </StackPanel>
+        
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Padding="0,5" Style="{StaticResource CaptionsText}" Grid.Row="0" Grid.Column="0" >Дата начала</TextBlock>
+            <TextBlock Padding="0,5" Style="{StaticResource CaptionsText}" Grid.Row="1" Grid.Column="0" >Дата конца</TextBlock>
+            <TextBlock Padding="0,5" Style="{StaticResource CaptionsText}" Grid.Row="2" Grid.Column="0"  >Вид из номера</TextBlock>
+            <TextBlock Padding="0,5" Style="{StaticResource CaptionsText}" Grid.Row="3" Grid.Column="0" >Тип номера</TextBlock>
+            <TextBlock Padding="0,5" Style="{StaticResource CaptionsText}" Grid.Row="4" Grid.Column="0"   >Вместимость</TextBlock>
+            <TextBlock Padding="0,5" Style="{StaticResource CaptionsText}" Grid.Row="5" Grid.Column="0"  >Стоимость</TextBlock>
+            
+            <DatePicker Height="30" Width="150" Style="{StaticResource DefaultDatePicker}" Grid.Row="0" Grid.Column="1" SelectedDate="{Binding StartDate,Mode=TwoWay,Converter={StaticResource conv}}" IsEnabled="{Binding Editable}" Margin="0,0,0,5"> </DatePicker>
+            <DatePicker Height="30" Width="150" Style="{StaticResource DefaultDatePicker}" Grid.Row="1" Grid.Column="1" SelectedDate="{Binding EndDate,Mode=TwoWay,Converter={StaticResource conv}}"  IsEnabled="{Binding Editable}"  Margin="0,5,0,5" ></DatePicker>
+            <ComboBox Style="{StaticResource ComboBoxFlatStyle}" Grid.Row="2" Grid.Column="1" SelectedValuePath="Name" SelectedValue="{Binding Reservation.RoomViewType,Mode=TwoWay}" DisplayMemberPath="Name" ItemsSource="{Binding Rview}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" ></ComboBox>
+            <ComboBox Style="{StaticResource ComboBoxFlatStyle}" Grid.Row="3" Grid.Column="1" SelectedValuePath="Name" SelectedValue="{Binding Reservation.RoomQuality,Mode=TwoWay}" DisplayMemberPath="Name" ItemsSource="{Binding Qal}" IsEnabled="{Binding Editable}" Margin="0,5,0,5"></ComboBox>
+            <ComboBox Style="{StaticResource ComboBoxFlatStyle}" Grid.Row="4" Grid.Column="1" SelectedValuePath="Value" SelectedValue="{Binding Reservation.RoomCapacity,Mode=TwoWay}" DisplayMemberPath="Value" ItemsSource="{Binding Cap}" IsEnabled="{Binding Editable}" Margin="0,5,0,5" ></ComboBox>
+            <TextBox Style="{StaticResource Input}" Grid.Row="5" Grid.Column="1" Text="{Binding Reservation.TotalCost,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="0,5,0,5" ></TextBox>
+            
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock  Grid.Row="0" Grid.Column="0" Padding="6" Style="{StaticResource CaptionsText}" >Имя клиента</TextBlock>
+            <TextBlock  Grid.Row="1" Grid.Column="0" Padding="6" Style="{StaticResource CaptionsText}" >Фамилия клиента</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Padding="6" Style="{StaticResource CaptionsText}" >Отчество клиента</TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Padding="6" Style="{StaticResource CaptionsText}" >Телефон</TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,3,0,0" Padding="6" Style="{StaticResource CaptionsText}" >Эл. Почта</TextBlock>
+            <Button Grid.Row="5" Grid.Column="0"  Style="{StaticResource ActionButton}" Visibility="{Binding AddButtonVisibility,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="120" Height="40" Command="{Binding ChooseExisting}">
+                <TextBlock Style="{StaticResource ButtonText}" TextAlignment="Center"  Text="Выбрать постояльца" TextWrapping="Wrap"></TextBlock>
+            </Button>
+            
+            <TextBox Margin="10,0,0,5" Grid.Row="0" Grid.Column="1" Style="{StaticResource Input}" IsReadOnly="{Binding IsCustomerExisting,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Customer.Name,Mode=TwoWay}" IsEnabled="{Binding Editable}"  MinHeight="22" MinWidth="140"></TextBox>
+            <TextBox Margin="10,0,0,5" Grid.Row="1" Grid.Column="1" Style="{StaticResource Input}" IsReadOnly="{Binding IsCustomerExisting,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Customer.Surname,Mode=TwoWay}" IsEnabled="{Binding Editable}"  MinHeight="22" MinWidth="140"></TextBox>
+            <TextBox Margin="10,0,0,5" Grid.Row="2" Grid.Column="1" Style="{StaticResource Input}" IsReadOnly="{Binding IsCustomerExisting,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Customer.LastName,Mode=TwoWay}" IsEnabled="{Binding Editable}"  MinHeight="22" MinWidth="140"></TextBox>
+            <TextBox Margin="10,0,0,5" Grid.Row="3" Grid.Column="1" Style="{StaticResource Input}" IsReadOnly="{Binding IsCustomerExisting,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Customer.PhoneNumber,Mode=TwoWay}" IsEnabled="{Binding Editable}"  MinHeight="22" MinWidth="140"></TextBox>
+            <TextBox Margin="10,0,0,5" Grid.Row="4" Grid.Column="1" Style="{StaticResource Input}" IsReadOnly="{Binding IsCustomerExisting,UpdateSourceTrigger=PropertyChanged}" Text="{Binding Customer.Email,Mode=TwoWay}" IsEnabled="{Binding Editable}"  MinHeight="22" MinWidth="140"></TextBox>
+            <Button Margin="10,0,0,0" Grid.Row="5" Grid.Column="1" Style="{StaticResource ActionButton}" Visibility="{Binding AddButtonVisibility,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="120" Height="40" Command="{Binding CreateNewCustomer}">
+                <TextBlock Style="{StaticResource ButtonText}" TextAlignment="Center"  Text="Новый постоялец" TextWrapping="Wrap"></TextBlock>
+            </Button>
+            
+        </Grid>
         <StackPanel Margin="0,20,0,0" Grid.Row="2" Grid.Column="1" Orientation="Vertical">
-            <CheckBox IsChecked="{Binding ServiceSauna,Mode=TwoWay}" IsEnabled="{Binding Editable}" Height="25">Сауна</CheckBox>
-            <CheckBox IsChecked="{Binding ServiceBilliards,Mode=TwoWay}" IsEnabled="{Binding Editable}" Height="25">Бильярд</CheckBox>
-            <CheckBox IsChecked="{Binding ServiceBar,Mode=TwoWay}" IsEnabled="{Binding Editable}" Height="25">Безлимитный бар</CheckBox>
+            <CheckBox Style="{StaticResource DefaultCheckBox}" IsChecked="{Binding ServiceSauna,Mode=TwoWay}" IsEnabled="{Binding Editable}" Height="25">Сауна</CheckBox>
+            <CheckBox Style="{StaticResource DefaultCheckBox}" IsChecked="{Binding ServiceBilliards,Mode=TwoWay}" IsEnabled="{Binding Editable}" Height="25">Бильярд</CheckBox>
+            <CheckBox Style="{StaticResource DefaultCheckBox}" IsChecked="{Binding ServiceBar,Mode=TwoWay}" IsEnabled="{Binding Editable}" Height="25">Безлимитный бар</CheckBox>
         </StackPanel>
-        <Button MaxHeight="80" MaxWidth="150" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding OK}">OK</Button>
+        <Button   Style="{StaticResource ActionButton}" Height="50" Width="150"  Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding OK}">
+           <TextBlock Style="{StaticResource ButtonText}">OK</TextBlock>
+        </Button>
     </Grid>
+       
 </UserControl>

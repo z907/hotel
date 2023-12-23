@@ -7,33 +7,42 @@
              xmlns:viewModel="clr-namespace:Hotel.ViewModel"
              xmlns:g="clr-namespace:Hotel.Global"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="330">
+             d:DesignHeight="200" d:DesignWidth="330"
+             Background="{StaticResource DefaultColorBrush}">
     <UserControl.Resources>
         <g:DateConverter x:Key="conv" ></g:DateConverter>
         <viewModel:PickDateVm x:Key="pdvm"></viewModel:PickDateVm>
     </UserControl.Resources> 
     <Grid>
-        <StackPanel Grid.Row="0" Grid.Column="0"   Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <TextBlock  Width="160" Height="30" >Дата начала</TextBlock>
-                <TextBlock Width="160" Height="30" >Дата конца</TextBlock>
-                <TextBlock Width="160" Height="30" >Вид из номера</TextBlock>
-                <TextBlock Width="160" Height="30">Тип номера</TextBlock>
-                <TextBlock Width="160" Height="30" >Вместимость номера</TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <DatePicker SelectedDate="{Binding Mode=TwoWay,Converter={StaticResource conv},  Path=NewRes.StartDate}" x:Name="d1"  Width="160" Height="30">
-               </DatePicker>
-                <DatePicker SelectedDate="{Binding Mode=TwoWay,Converter={StaticResource conv}, Path=NewRes.EndDate}" x:Name="d2" Width="160"  Height="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+                <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource CaptionsText}"  Width="160" Height="30" >Дата начала</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource CaptionsText}" Width="160" Height="30" >Дата конца</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource CaptionsText}" Width="160" Height="30" >Вид из номера</TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource CaptionsText}"  Width="160" Height="30">Тип номера</TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource CaptionsText}" Width="160" Height="30" >Мест в номере</TextBlock>
+           
+                <DatePicker Margin="5" Grid.Row="0" Grid.Column="1"  Style="{StaticResource DefaultDatePicker}"  SelectedDate="{Binding Mode=TwoWay,Converter={StaticResource conv},  Path=NewRes.StartDate}" x:Name="d1"  Width="150" Height="30">
                 </DatePicker>
-                <ComboBox DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay, Source={StaticResource pdvm}, Path=Rview}" SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomViewType}" x:Name="c1"  Width="160" Height="30">
+                <DatePicker Margin="5" Grid.Row="1" Grid.Column="1" Style="{StaticResource DefaultDatePicker}" SelectedDate="{Binding Mode=TwoWay,Converter={StaticResource conv}, Path=NewRes.EndDate}" x:Name="d2" Width="150"  Height="30">
+                </DatePicker>
+                <ComboBox Margin="5" Grid.Row="2" Grid.Column="1" Style="{StaticResource ComboBoxFlatStyle}" DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay, Source={StaticResource pdvm}, Path=Rview}" SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomViewType}" x:Name="c1"  Width="150" Height="30">
                   </ComboBox>
-                <ComboBox DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay,Source={StaticResource pdvm}, Path=Qal}"  x:Name="c2" SelectedValue="{Binding Mode=TwoWay, Path=NewRes.RoomQuality}"  Width="160" Height="30" >
+                <ComboBox Margin="5" Grid.Row="3" Grid.Column="1" Style="{StaticResource ComboBoxFlatStyle}" DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Mode=OneWay,Source={StaticResource pdvm}, Path=Qal}"  x:Name="c2" SelectedValue="{Binding Mode=TwoWay, Path=NewRes.RoomQuality}"  Width="150" Height="30" >
                 </ComboBox>
-                <ComboBox DisplayMemberPath="Value" SelectedValuePath="Value" ItemsSource="{Binding Mode=OneWay,Source={StaticResource pdvm}, Path=Cap}"  SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomCapacity}" x:Name="c3" Width="160" Height="30">
+                <ComboBox Margin="5" Grid.Row="4" Grid.Column="1" Style="{StaticResource ComboBoxFlatStyle}" DisplayMemberPath="Value" SelectedValuePath="Value" ItemsSource="{Binding Mode=OneWay,Source={StaticResource pdvm}, Path=Cap}"  SelectedValue="{Binding Mode=TwoWay,  Path=NewRes.RoomCapacity}" x:Name="c3" Width="150" Height="30">
                 </ComboBox>
-            </StackPanel>
-        </StackPanel>
+           
     </Grid>
    
 </UserControl>

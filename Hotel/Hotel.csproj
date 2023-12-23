@@ -46,6 +46,16 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="View\FinishConfirmationDialog.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="View\IncomeReport.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
@@ -53,7 +63,72 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DisplayEntities\" />
+      <PackageReference Include="CsvHelper" Version="30.0.1" />
+      <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+      <PackageReference Include="LiveCharts" Version="0.9.7" />
+      <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="8.0.0" />
+      <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="View\Icons\MainIcon.png" />
+      <Resource Include="View\Icons\MainIcon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="View\Icons\UserIcon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\user-group-296.png" />
+      <None Remove="View\Icons\ResIcon.png" />
+      <Resource Include="View\Icons\ResIcon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\CheckInIcon.png" />
+      <Resource Include="View\Icons\CheckInIcon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\UsersIcon.png" />
+      <Resource Include="View\Icons\UsersIcon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\Report2Icon.png" />
+      <Resource Include="View\Icons\Report2Icon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\Report1Icon.png" />
+      <Resource Include="View\Icons\Report1Icon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\RoomsIcon.png" />
+      <Resource Include="View\Icons\RoomsIcon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\Calendar.png" />
+      <Resource Include="View\Icons\Calendar.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\Checked.png" />
+      <Resource Include="View\Icons\Checked.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="View\Icons\Normal.png" />
+      <Resource Include="View\Icons\Normal.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="View\Icons\" />
     </ItemGroup>
 
 </Project>

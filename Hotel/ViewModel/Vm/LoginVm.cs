@@ -13,7 +13,7 @@ public class LoginVm:BaseVm
     private string _userName;
     private string _password;
     private string _errorMessage;
-    private IService logServ;
+    private UserService logServ;
     public string Password
     {
         get => _password;
@@ -46,15 +46,14 @@ public class LoginVm:BaseVm
     }
     private void ExecuteLoginCommand(object obj)
     {
-        var l = logServ as UserService;
-       var u= l.CheckPassword(UserName, Password);
+       var u= logServ.CheckPassword(UserName, Password);
        if (u == null)
        {
            ErrMessage = "Wrong password or login";
        }
        else
        {
-           Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
+           Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), new string[]{logServ.GetRole(UserName)});
            IsLogViewVisible = false;
        }
        
@@ -63,7 +62,7 @@ public class LoginVm:BaseVm
     {
         return true;
     }
-    public LoginVm(IService Service)
+    public LoginVm(UserService Service)
     {
         LoginCommand = new VmCommand(ExecuteLoginCommand,CanExecuteLoginCommand);
         logServ = Service;

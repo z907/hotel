@@ -6,32 +6,38 @@
         xmlns:local="clr-namespace:Hotel.View"
         xmlns:viewModel="clr-namespace:Hotel.ViewModel"
         mc:Ignorable="d"
-        Title="DeleteConfirmationDialog" Height="200" Width="200">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Style="{StaticResource DefaultDialog}"
+        Title="DeleteConfirmationDialog" Height="200" Width="300"
+        MouseDown="Window_MouseDown">
     <Window.Resources>
         <viewModel:DeleteConfirmationVm x:Key="dcv"></viewModel:DeleteConfirmationVm>
     </Window.Resources>
+    <Border Style="{StaticResource DialogWindowBorder}" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="2*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock FontWeight="Bold" Grid.Row="1" Width="140" TextAlignment="Center" TextWrapping="Wrap">Вы уверены что хотите удалить эту запись?</TextBlock>
+        <TextBlock Foreground="Red" Style="{StaticResource CaptionsText}" FontWeight="Bold" Grid.Row="1" Width="140" TextAlignment="Center" TextWrapping="Wrap">Вы уверены что хотите удалить эту запись?</TextBlock>
         <Grid Grid.Row="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button CommandParameter="{Binding ElementName=Window}" Command="{Binding Source={StaticResource dcv}, Path=Confirm}">
-                <TextBlock FontWeight="Bold" Grid.Row="1"  TextAlignment="Center" TextWrapping="Wrap">Да</TextBlock>
+            <Button Style="{StaticResource NavigationButton}" CommandParameter="{Binding ElementName=Window}" Command="{Binding Source={StaticResource dcv}, Path=Confirm}">
+                <TextBlock Style="{StaticResource ButtonText}"  Grid.Row="1"  TextAlignment="Center" TextWrapping="Wrap">Да</TextBlock>
             </Button>
-            <Button CommandParameter="{Binding ElementName=Window}" Command="{Binding Source={StaticResource dcv}, Path=Cancel}" Grid.Column="1">
-              <TextBlock FontWeight="Bold" Grid.Row="1"  TextAlignment="Center" TextWrapping="Wrap">Нет</TextBlock>
+            <Button Style="{StaticResource NavigationButton}" CommandParameter="{Binding ElementName=Window}" Command="{Binding Source={StaticResource dcv}, Path=Cancel}" Grid.Column="1">
+              <TextBlock Style="{StaticResource ButtonText}"  Grid.Row="1"  TextAlignment="Center" TextWrapping="Wrap">Нет</TextBlock>
             </Button>
         </Grid>
     </Grid>
+    </Border>
 </Window>

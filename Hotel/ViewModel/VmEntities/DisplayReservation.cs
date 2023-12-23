@@ -36,7 +36,7 @@ public class DisplayReservation
     public string? RoomQuality { get; set; }
     [DisplayName("Вместимость")]
     public int? RoomCapacity { get; set; }
-    [DisplayName("Фамилия постояльца")]
+    [DisplayName("Фамилия")]
     public string? CustomerSurname { get; set; }
     [DisplayName("Стоимость")]
     public int? TotalCost { get; set; }

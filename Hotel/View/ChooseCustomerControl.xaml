@@ -6,33 +6,41 @@
              xmlns:local="clr-namespace:Hotel.View"
              xmlns:viewModel="clr-namespace:Hotel.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="330">
+             d:DesignHeight="250" d:DesignWidth="330"
+             Background="{StaticResource DefaultColorBrush}">
     <Control.Resources>
         <viewModel:ChooseCustomerVm x:Key="ccv"></viewModel:ChooseCustomerVm>
     </Control.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0"   Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <TextBlock  Width="160" Height="30" >Имя</TextBlock>
-                <TextBlock Width="160" Height="30" >Фамилия</TextBlock>
-                <TextBlock Width="160" Height="30" >Отчество</TextBlock>
-                <TextBlock Width="160" Height="30">Эл.Почта</TextBlock>
-                <TextBlock Width="160" Height="30" >Номер телефона</TextBlock>
-                <Button CommandParameter="{Binding ElementName=Cc,Path=DataContext}" Command="{Binding Source={StaticResource ccv},Path=ChooseExistingCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25">
-                    <TextBlock TextAlignment="Center" TextWrapping="Wrap">Выбрать</TextBlock> 
-                </Button>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.Name,Mode=TwoWay}"></TextBox>
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.Surname,Mode=TwoWay}"></TextBox>
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.LastName,Mode=TwoWay}"></TextBox> 
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.Email,Mode=TwoWay}"></TextBox>
-                <TextBox MinWidth="160" MinHeight="30" Margin="0,0,0,0" Text="{Binding Customer.PhoneNumber,Mode=TwoWay}"></TextBox>
-            </StackPanel>
-        </StackPanel>
-        
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource CaptionsText}"  >Имя</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource CaptionsText}"  >Фамилия</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource CaptionsText}"  >Отчество</TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource CaptionsText}" >Эл.Почта</TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource CaptionsText}"  >Номер телефона</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource Input}" Text="{Binding Customer.Name,Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Input}"  Text="{Binding Customer.Surname,Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="1"  Style="{StaticResource Input}" Text="{Binding Customer.LastName,Mode=TwoWay}"></TextBox> 
+            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Input}" Text="{Binding Customer.Email,Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource Input}" Text="{Binding Customer.PhoneNumber,Mode=TwoWay}"></TextBox>
+        </Grid>
+        <Button Grid.Row="1" BorderBrush="Azure" BorderThickness="2" Style="{StaticResource ActionButton}" CommandParameter="{Binding ElementName=Cc,Path=DataContext}" Command="{Binding Source={StaticResource ccv},Path=ChooseExistingCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <TextBlock Style="{StaticResource CaptionsText}" TextAlignment="Center" TextWrapping="Wrap">Выбрать</TextBlock> 
+        </Button>    
     </Grid>
 </UserControl>

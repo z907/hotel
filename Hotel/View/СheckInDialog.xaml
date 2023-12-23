@@ -6,20 +6,35 @@
         xmlns:local="clr-namespace:Hotel.View"
         xmlns:viewModel="clr-namespace:Hotel.ViewModel"
         mc:Ignorable="d"
-        Title="Заселение" Height="900" Width="700">
+        Title="Заселение" Height="800" Width="900"
+        Style="{StaticResource DefaultDialog}"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:CheckInVm/>
     </Window.DataContext>
+    <Border Style="{StaticResource DialogWindowBorder}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="7*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0">
-            <DataGrid MouseDown="Gr_OnMouseDown" AutoGenerateColumns="False" SelectedItem="{Binding SelRoom,Mode=OneWayToSource}"  x:Name="gr" ItemsSource="{Binding Rooms}">
+        <Button VerticalAlignment="Center" HorizontalAlignment="Right" Click="CloseClick" Style="{StaticResource CloseButton}"></Button>
+        <ScrollViewer Style="{StaticResource DefaultScroller}" VerticalScrollBarVisibility="Visible" Grid.Row="1">
+            <DataGrid  Style="{StaticResource DefaultDataGrid}" MouseDown="Gr_OnMouseDown" AutoGenerateColumns="False" SelectedItem="{Binding SelRoom,Mode=OneWayToSource}"  x:Name="gr" ItemsSource="{Binding Rooms}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="1*" Header="Номер комнаты" Binding="{Binding Number}" />
-                <DataGridTemplateColumn Header="Image" Width="5*"
+                <DataGridTextColumn  Width="1*" Header="Номер комнаты" Binding="{Binding Number}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                            <Setter Property="FontSize" Value="32" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Фото" Width="5*"
                                         IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -30,6 +45,7 @@
             </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
-        <Button CommandParameter="{Binding ElementName=wnd}" Command="{Binding OK}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100">OK</Button>
+        <Button Style="{StaticResource ActionButton}" CommandParameter="{Binding ElementName=wnd}" Command="{Binding OK}" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" >OK</Button>
     </Grid>
+    </Border>
 </Window>

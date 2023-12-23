@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Hotel.Global;
 using Hotel.View;
 using Hotel.VmEntities;
 using Model.Context;
@@ -14,7 +15,7 @@ namespace Hotel.ViewModel;
 public class TodayVm:BaseVm
 {
     private ReservationService res;
-    
+    private MidnightTimer _timer = new MidnightTimer();
     private List<DisplayReservation> _todayList;
     private DisplayReservation _selectedRes;
     
@@ -63,14 +64,22 @@ public class TodayVm:BaseVm
     public TodayVm()
     {
         res = new ReservationService();
+        res.CancelExpiredReservations();
         TodayList = res.GetTodayReservation();
         Edit = new VmCommand(ExecuteEditCommand, CanExecuteEditCommand);
         Add = new VmCommand(ExecuteAddCommand, CanExecuteAddCommand);
         Delete = new VmCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
         Details = new VmCommand(ExecuteDetailsCommand, CanExecuteDetailsCommand);
         CheckIn= new VmCommand(ExecuteCheckInCommand, CanExecuteCheckInCommand);
+        _timer.TimeReached += new TimeReachedEventHandler(this.MidnightReached);
+        _timer.Start();
     }
-    
+
+    private void MidnightReached(DateTime Time)
+    {
+        res.CancelExpiredReservations();
+        TodayList = res.GetTodayReservation();
+    }
     private void ExecuteCheckInCommand(object obj)
     {
         if (SelectedRes.StartDate.Value.Year != DateTime.Now.Year || SelectedRes.StartDate.Value.Month !=DateTime.Now.Month|| SelectedRes.StartDate.Value.Day != DateTime.Now.Day)

@@ -6,11 +6,21 @@
         xmlns:local="clr-namespace:Hotel.View"
         xmlns:viewModel="clr-namespace:Hotel.ViewModel"
         mc:Ignorable="d"
-        Title="Изменение" Height="550" Width="700">
+        Title="Изменение" Height="550" Width="700"
+        Style="{StaticResource DefaultDialog}"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen">
    <Window.DataContext>
        <viewModel:DetailsVm></viewModel:DetailsVm>
    </Window.DataContext>
-    <Grid>
-        <local:DetailedControl></local:DetailedControl>
-    </Grid>
+    <Border Style="{StaticResource DialogWindowBorder}"> 
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Click="CloseClick"  HorizontalAlignment="Right" Style="{StaticResource CloseButton}"></Button>
+            <local:DetailedControl Grid.Row="1"></local:DetailedControl>
+        </Grid>
+    </Border>
 </Window>

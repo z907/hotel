@@ -7,42 +7,50 @@
              xmlns:viewModel="clr-namespace:Hotel.ViewModel"
             xmlns:handler="clr-namespace:Hotel.Global"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="{StaticResource DefaultColorBrush}">
     <UserControl.DataContext>
         <viewModel:TodayVm></viewModel:TodayVm>
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <handler:AutoGenerateHandler  x:Key="handle"></handler:AutoGenerateHandler>
-    </UserControl.Resources>
-    <Grid>
+   
+    <Grid Background="{StaticResource DefaultColorBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Background="{StaticResource DefaultColorBrush}" Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button Command="{Binding Add}" Grid.Column="0">Добавить</Button>
-            <Button Command="{Binding Delete}"  Grid.Column="1">Удалить</Button>
-            <Button Command="{Binding Edit}" Grid.Column="2">Изменить</Button>
-            <Button Command="{Binding Details}" Grid.Column="3">Просмотреть</Button>
-            <Button Command="{Binding CheckIn}" Grid.Column="4">Заселить</Button>
+            <Button Style="{StaticResource ControlButton}" Command="{Binding Add}" Grid.Column="0">
+                <TextBlock Style="{StaticResource ButtonText}">Добавить</TextBlock>
+            </Button>
+            <Button Style="{StaticResource ControlButton}" Command="{Binding Delete}"  Grid.Column="1">
+                 <TextBlock Style="{StaticResource ButtonText}">Удалить</TextBlock>
+            </Button>
+            <Button Style="{StaticResource ControlButton}" Command="{Binding Edit}" Grid.Column="2">
+                <TextBlock Style="{StaticResource ButtonText}">Изменить</TextBlock>
+            </Button>
+            <Button Style="{StaticResource ControlButton}" Command="{Binding Details}" Grid.Column="3">
+               <TextBlock Style="{StaticResource ButtonText}">Просмотреть</TextBlock>
+            </Button>
+            <Button Style="{StaticResource ControlButton}" Command="{Binding CheckIn}" Grid.Column="4">
+                <TextBlock Style="{StaticResource ButtonText}">Заселить</TextBlock>
+            </Button>
         </Grid>
-            <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1">
-                
-                    <DataGrid MouseDown="dataGrid1_MouseLeftButtonDown" ColumnWidth="*"  SelectedItem="{Binding Path=SelectedRes, Mode=TwoWay}" AutoGenerateColumns="True" x:Name="TodayDataGrid" ItemsSource="{Binding TodayList}" >
-                    </DataGrid>
+            <ScrollViewer  Style="{StaticResource DefaultScroller}" Background="{StaticResource DefaultColorBrush}"  VerticalScrollBarVisibility="Visible" Grid.Row="1">
+                <DataGrid Style="{StaticResource DefaultDataGrid}" MouseDown="dataGrid1_MouseLeftButtonDown" SelectedItem="{Binding Path=SelectedRes, Mode=TwoWay}" AutoGenerateColumns="True" x:Name="TodayDataGrid" ItemsSource="{Binding TodayList}" >
+                </DataGrid>
                 
         </ScrollViewer>
         

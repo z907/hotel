@@ -4,6 +4,7 @@ using Hotel.VmEntities;
 using Model.Entities;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using ViewModel.VmEntities;
 
 namespace ViewModel.Services;
@@ -71,7 +72,8 @@ public class ReservationService:BaseService
    
     public List<DisplayReservation> GetTodayReservation()
     {
-        
+        db.ReservationStatuses.Load();
+        db.Reservations.Load();
         List<DisplayReservation> result=(from r in db.Reservations.
             Include(res=>res.Customer).
             Include(res=>res.RoomAttributes).
@@ -117,5 +119,21 @@ public class ReservationService:BaseService
         return db.Reservations.ToList().First(r => r.StartDate == item.StartDate && r.EndDate==item.EndDate 
          && r.CustomerId==item.CustomerId && r.RoomAttributes.Capacity.Value==item.RoomCapacity 
          && r.RoomAttributes.Quality.Name==item.RoomQuality && r.RoomAttributes.View.Name==item.RoomViewType && r.TotalCost==item.TotalCost && r.Status.Status=="Активно").Id;
+    }
+
+    public void CancelExpiredReservations()
+    {
+        //finish
+        db.ReservationStatuses.Load();
+        DateOnly d = DateOnly.FromDateTime(DateTime.Now);
+        var ls = db.Reservations.Where(r =>
+            r.StartDate < DateOnly.FromDateTime(DateTime.Now) && r.Status.Status == "Активно");
+        int newStatus =db.ReservationStatuses.First(r => r.Status == "Отменено").Id ;
+        foreach (var r in ls)
+        {
+            r.StatusId =newStatus ;
+        }
+          db.UpdateRange(ls);
+          db.SaveChanges();
     }
 }

@@ -18,13 +18,22 @@ public class DetailsVm:BaseVm
     private CostService costServ;
     private AttributeService attrServ;
 
-    private bool isCustomerNew = false;
+    private bool isCustomerExisting = true;
     private bool _serviceBilliards; 
     private bool _serviceSauna; 
     private bool _serviceBar;
     private  bool _Editable=false;
     private Visibility _addButtonVisibility=Visibility.Collapsed;
     
+    public bool IsCustomerExisting
+    {
+        get => isCustomerExisting;
+        set
+        {
+            isCustomerExisting = value;
+            OnPropertyChanged(nameof(IsCustomerExisting));
+        } 
+    }
     public Visibility AddButtonVisibility
     {
         get => _addButtonVisibility;
@@ -203,7 +212,7 @@ public class DetailsVm:BaseVm
     private void ExecuteCreateNewCustomer(object obj)
     {
         Customer = new Customer();
-        isCustomerNew = true;
+        IsCustomerExisting = false;
     }
     private bool CanExecuteCreateNewCustomer(object obj)
     {
@@ -217,7 +226,7 @@ public class DetailsVm:BaseVm
         {
             BindingExpression be = chooseEx.gr.GetBindingExpression(DataGrid.SelectedItemProperty);
             be.UpdateSource();
-            isCustomerNew = false;
+            IsCustomerExisting = true;
         }
     }
     private bool CanExecuteChooseExisting(object obj)
@@ -248,7 +257,7 @@ public class DetailsVm:BaseVm
         {
             if (checkServ.CheckForFreeRoomsUpdate(Reservation))
             {
-                if(isCustomerNew) custServ.AddCustomer(Customer);
+                if(!IsCustomerExisting) custServ.AddCustomer(Customer);
                 custServ.GetId(Customer);
                 resServ.UpdateReservation(Reservation);
                 serviceServ.RemakeServices(ServiceBar, ServiceSauna, ServiceBilliards,(int)Reservation.Id);
@@ -275,7 +284,7 @@ public class DetailsVm:BaseVm
             MessageBox.Show("Заполните поля!");
             return false;
         }
-        if(Reservation.StartDate>Reservation.EndDate) 
+        if(Reservation.StartDate>Reservation.EndDate || Reservation.StartDate<new DateOnly(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day)) 
         {
             MessageBox.Show("Некорректные даты!");
             return false;

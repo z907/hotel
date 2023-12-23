@@ -1,0 +1,106 @@
+<Window x:Name="wnd" x:Class="Hotel.View.CheckInDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Hotel.View"
+        mc:Ignorable="d"
+        xmlns:g="clr-namespace:Hotel.Global"
+        Style="{StaticResource DefaultDialog}"
+        Title="CheckInDetails" Height="500" Width="750"
+        WindowStartupLocation="CenterScreen"
+        xmlns:viewModel="clr-namespace:Hotel.ViewModel"
+        xmlns:global="clr-namespace:Hotel.Global"
+        MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <g:DateConverter x:Key="conv" ></g:DateConverter>
+    </Window.Resources> 
+    <Window.DataContext>
+        <viewModel:CheckInDetailsVm></viewModel:CheckInDetailsVm>
+    </Window.DataContext>
+  
+    <Border Style="{StaticResource DialogWindowBorder}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="4" Click="CloseClick" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource CloseButton}"></Button>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Padding="0,5" Grid.Row="0" Grid.Column="0" Style="{StaticResource CaptionsText}">Дата начала</TextBlock>
+                <TextBlock Padding="0,5" Grid.Row="1" Grid.Column="0" Style="{StaticResource CaptionsText}">Дата конца</TextBlock>
+                <TextBlock  Padding="0,5" Grid.Row="2" Grid.Column="0" Style="{StaticResource CaptionsText}">Вид из номера</TextBlock>
+                <TextBlock Padding="0,5" Grid.Row="3" Grid.Column="0" Style="{StaticResource CaptionsText}">Тип номера</TextBlock>
+                <TextBlock Padding="0,5" Grid.Row="4" Grid.Column="0" Style="{StaticResource CaptionsText}">Вместимость</TextBlock>
+                
+                <DatePicker Width="150" SelectedDate="{Binding SelectedCheckIn.StartDate,Converter={StaticResource conv}}" Margin="0,5,0,5" Grid.Row="0" Grid.Column="1" IsEnabled="False" Style="{StaticResource DefaultDatePicker}"></DatePicker>
+                <DatePicker Width="150" SelectedDate="{Binding SelectedCheckIn.EndDate,Converter={StaticResource conv}}"  Margin="0,5,0,5" Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{StaticResource DefaultDatePicker}"></DatePicker>
+                <TextBox Text="{Binding SelectedCheckIn.RoomViewType}"  Margin="0,5,0,5" Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                <TextBox Text="{Binding SelectedCheckIn.RoomQuality}" Margin="0,5,0,5" Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                <TextBox Text="{Binding SelectedCheckIn.RoomCapacity}" Margin="0,5,0,5" Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                
+            </Grid>
+            
+            <Grid Grid.Column="3" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Padding="0,5" Grid.Row="0" Grid.Column="0" Style="{StaticResource CaptionsText}">Фамилия</TextBlock>
+                <TextBlock Padding="0,5" Grid.Row="1" Grid.Column="0" Style="{StaticResource CaptionsText}">Комната</TextBlock>
+                <TextBlock  Padding="0,5" Grid.Row="2" Grid.Column="0" Style="{StaticResource CaptionsText}">Статус</TextBlock>
+                <TextBlock Padding="0,5" Grid.Row="3" Grid.Column="0" Style="{StaticResource CaptionsText}">К оплате</TextBlock>
+                <TextBlock Padding="0,5" Grid.Row="4" Grid.Column="0" Style="{StaticResource CaptionsText}">Стоимость</TextBlock>
+                
+                <TextBox Text="{Binding SelectedCheckIn.CustomerSurname}"  Margin="0,5,0,5" Grid.Row="0" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                <TextBox Text="{Binding SelectedCheckIn.RoomNum}"  Margin="0,5,0,5" Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                <TextBox Text="{Binding SelectedCheckIn.Status}"  Margin="0,5,0,5" Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                <TextBox Text="{Binding SelectedCheckIn.ToPay}" Margin="0,5,0,5" Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                <TextBox Text="{Binding SelectedCheckIn.TotalCost}" Margin="0,5,0,5" Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{StaticResource Input}"></TextBox>
+                
+            </Grid>
+            
+            <StackPanel Margin="0,20,0,0" Grid.Row="3" Grid.Column="1" Orientation="Vertical">
+                <CheckBox Style="{StaticResource DefaultCheckBox}" IsChecked="{Binding Sauna}" IsEnabled="False" Height="25">Сауна</CheckBox>
+                <CheckBox Style="{StaticResource DefaultCheckBox}" IsChecked="{Binding Billiards}" IsEnabled="False" Height="25">Бильярд</CheckBox>
+                <CheckBox Style="{StaticResource DefaultCheckBox}" IsChecked="{Binding Bar}" IsEnabled="False" Height="25">Безлимитный бар</CheckBox>
+            </StackPanel>
+            
+            <Button CommandParameter="{Binding ElementName=wnd}" Command="{Binding OK}" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="5" Style="{StaticResource ActionButton}">
+                <TextBlock  Style="{StaticResource ButtonText}">OK</TextBlock>
+            </Button>
+        </Grid>
+    </Border>
+</Window>

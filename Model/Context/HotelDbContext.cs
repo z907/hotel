@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Xml;
+using Microsoft.Extensions.Configuration.Json;
+
+using Microsoft.Extensions.Options;
 using Model.Entities;
 
 namespace Model.Context;
@@ -44,8 +48,13 @@ public partial class HotelDbContext : DbContext
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=hotel;Username=postgres;Password=zv1488");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+    {
+        IConfiguration conf = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+        IConfigurationSection section = conf.GetSection("Connections");
+        optionsBuilder.UseNpgsql(section.GetSection("pgsConnectionString").Value);
+    }
+            //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=hotel;Username=postgres;Password=zv1488");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

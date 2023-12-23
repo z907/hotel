@@ -6,65 +6,122 @@
         xmlns:local="clr-namespace:Hotel"
         xmlns:viewModel="clr-namespace:Hotel.ViewModel"
         mc:Ignorable="d"
-        Title="Hotel Management" Height="800" Width="1000">
+        Title="Hotel Management" Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource DefaultWindow}"
+        MouseDown="Window_MouseDown">
+    
     <Window.DataContext>
         <viewModel:MainVm></viewModel:MainVm>
     </Window.DataContext>
+    <Border Style="{StaticResource WindowBorder}">
     <Grid x:Name="MainGrid">
        <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="8*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-        
-        <Grid x:Name="MenuButtons" Grid.Row="0" Grid.Column="0">
-            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+        <Border BorderBrush="Black" BorderThickness="0,0,0,1" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Background="{StaticResource DefaultColorBrush}"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Margin="5" Width="30" Height="30" Grid.Column="0" Source="/View/Icons/MainIcon.png" />
+            <Button Grid.Column="3" Click="CloseClick" Style="{StaticResource CloseButton}"></Button>
+            <Button Grid.Column="2" Click="MinimizeClick"  Style="{StaticResource MinimizeButton}"></Button>
+            <TextBlock Grid.Column="1" FontStyle="Italic" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left"   Foreground="#33de7d" VerticalAlignment="Center" FontFamily="Montserrat" >Hotel Management System</TextBlock>
+        </Grid>
+        </Border>
+        
+        <Grid x:Name="MenuButtons" Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180"/>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition  Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0px,0px,0px,1px" Grid.Row="0">
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition  Height="*"/>
+                    
                     <RowDefinition  Height="2*"/>
+                    <RowDefinition  Height="Auto"/>
                     <RowDefinition  Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1" TextAlignment="Center" Text="Текущий пользователь">
-                </TextBlock>
-                <TextBlock Grid.Row="2" TextAlignment="Center" Text="{Binding UserName}"  >
-                </TextBlock>
-                <Button Grid.Row="3" Height="50" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Управление учетными записями"></TextBlock>
+                <StackPanel HorizontalAlignment="Center" Grid.Row="1"  Orientation="Horizontal">
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/View/Icons/UserIcon.png" Margin="5" Width="35" Height="35"  />
+                    <TextBlock VerticalAlignment="Center" Foreground="#eb6763" FontSize="18" FontFamily="Montserrat" FontWeight="SemiBold"  TextAlignment="Center" Text="{Binding UserName}"  >
+                    </TextBlock>
+                </StackPanel>
+                
+                <Button IsEnabled="{Binding IsUserAdmin}" Style="{StaticResource MainMenuButton}" Grid.Row="2" Height="70" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <TextBlock Style="{StaticResource ButtonText}" TextWrapping="Wrap" TextAlignment="Center" Text="Управление учетными записями"></TextBlock>
                 </Button>
             </Grid>
-            <Button Grid.Row="1" CommandParameter="{Binding ElementName=SelectedItem}" Command="{Binding ShowTodayListCommand}" >Бронирования</Button>
-            <Button Grid.Row="2">Заселения</Button>
-            <Button Grid.Row="3" >Постояльцы</Button>
-            <Button Grid.Row="4" >Комнаты</Button>
-            <Button Grid.Row="5" >Отчет о прибыли</Button>
-            <Button Grid.Row="6" >Отчет о занятости</Button>
+            </Border>
+            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/View/Icons/ResIcon.png" Margin="15,5,5,10" Width="30" Height="30" Grid.Column="0"   Grid.Row="1" />
+            <Button Grid.Column="1" Style="{StaticResource MainMenuButton}" Grid.Row="1" CommandParameter="{Binding ElementName=SelectedItem}" Command="{Binding ShowTodayListCommand}" >
+               <TextBlock Style="{StaticResource ButtonText}">Бронирования</TextBlock>
+            </Button>
+            
+            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/View/Icons/CheckInIcon.png" Margin="15,5,5,10" Width="30" Height="30" Grid.Column="0"   Grid.Row="2" />
+            <Button CommandParameter="{Binding ElementName=SelectedItem}" Command="{Binding ShowCheckIns}"
+                    Grid.Column="1" Style="{StaticResource MainMenuButton}" Grid.Row="2">
+                <TextBlock Style="{StaticResource ButtonText}">Заселения</TextBlock>
+            </Button>
+            
+            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/View/Icons/UsersIcon.png" Margin="15,5,5,10" Width="30" Height="30" Grid.Column="0"   Grid.Row="3" />
+            <Button Grid.Column="1" Style="{StaticResource MainMenuButton}" Grid.Row="3" >
+                <TextBlock Style="{StaticResource ButtonText}">Постояльцы</TextBlock>
+            </Button>
+            
+            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/View/Icons/RoomsIcon.png" Margin="15,5,5,10" Width="30" Height="30" Grid.Column="0"   Grid.Row="4" />
+            <Button Command="{Binding ShowRooms}" CommandParameter="{Binding ElementName=SelectedItem}" Grid.Column="1" Style="{StaticResource MainMenuButton}" Grid.Row="4" >
+                <TextBlock Style="{StaticResource ButtonText}">Комнаты</TextBlock>
+            </Button>
+            
+            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/View/Icons/Report1Icon.png" Margin="15,5,5,10" Width="30" Height="30" Grid.Column="0"   Grid.Row="5" />
+            <Button IsEnabled="{Binding IsUserAdmin}" CommandParameter="{Binding ElementName=SelectedItem}" Command="{Binding IncReport}" Grid.Column="1" Style="{StaticResource MainMenuButton}" Grid.Row="5" >
+                <TextBlock Style="{StaticResource ButtonText}"> Отчет о прибыли</TextBlock>
+            </Button>
+            
+            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/View/Icons/Report2Icon.png" Margin="15,5,5,10" Width="30" Height="30" Grid.Column="0"   Grid.Row="6" />
+            <Button IsEnabled="{Binding IsUserAdmin}" CommandParameter="{Binding ElementName=SelectedItem}" Command="{Binding OccupancyReport}" Grid.Column="1" Style="{StaticResource MainMenuButton}" Grid.Row="6" >
+                <TextBlock Style="{StaticResource ButtonText}"> Отчет о занятости</TextBlock>
+            </Button>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1"  x:Name="SelectedItem" >
+        
+        <Border BorderBrush="Black" BorderThickness="1px,0px,0px,0px" Grid.Row="1" Grid.Column="1">
+        <Grid   x:Name="SelectedItem" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
         </Grid>
+            </Border>
     </Grid> 
+        </Border>
 </Window>

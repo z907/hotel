@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:Hotel"
              Startup="Application_Startup">
     <Application.Resources>
-         
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary Source="View/Resources/Colors.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/Buttons.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/TextBlocks.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/TextBoxes.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/WindowStyles.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/DataGrids.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/Scrollers.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/CheckBoxes.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/ComboBoxes.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="View/Resources/DatePickers.xaml"></ResourceDictionary>
+             </ResourceDictionary.MergedDictionaries>
+         </ResourceDictionary>
     </Application.Resources>
 </Application>
